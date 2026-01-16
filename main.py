@@ -1,7 +1,12 @@
 import tkinter as tk
 import csv
 import datetime
+import os
 
+filename = 'event_log.csv'
+headers = ['Timestamp', 'Event type']
+
+file_exists = os.path.exists(filename)
 
 def save_data():
     event = entry1.get()
@@ -13,6 +18,9 @@ def save_data():
 
     with open("event_log.csv", mode="a", newline="") as csv_file:
         csv_writer = csv.writer(csv_file)
+
+        if not file_exists:
+            csv_writer.writerow(headers)
 
         csv_writer.writerow(data_row)
 
